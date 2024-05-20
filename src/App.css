@@ -1,0 +1,83 @@
+/* fonts */
+.playball-regular {
+  font-family: "Playball", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* fonts */
+
+header{
+  height: 60px;
+}
+
+
+.header-logo-box{
+  height: 85px;
+  z-index: 10000;
+}
+
+header h1{
+  font-size: 60px;
+  transition: 0.4s;
+}
+
+nav a{
+  transition: 0.5s;
+}
+
+nav a:hover{
+  color: black !important;
+}
+
+header h1:hover{
+  color: black;
+  
+}
+
+.search-input:focus{
+  border: 0;
+  outline: 0;
+}
+
+
+
+
+.bg-main{
+  background-color: #fff200;
+}
+
+.bg-button{
+  background-color: #4F7177;
+}
+
+
+
+
+
+
+
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (max-width:425px) {
+  .header-logo-box{
+    height: 60px;
+  }
+
+  header{
+    background-color: #fff200 !important;
+  }
+
+  header h1{
+    font-size: 50px;
+  }
+}

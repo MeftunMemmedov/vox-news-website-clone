@@ -1,0 +1,48 @@
+/* .h2{
+    width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid #000; 
+   line-height: 0.1em;
+   margin: 10px 0 20px; 
+}
+
+h2 span{
+    background:#fff; 
+    padding:0 10px;
+} */
+
+.top-stories-text-box{
+    border: 5px solid #fff200;
+    border-bottom: 0;
+    height: 80px;
+}
+
+
+.top-stories-text-box h2{
+    margin-top: -23px!important;
+    background-color: white;
+    width: 18%;
+
+}
+
+.top-stories-box{
+    margin-top: -35px;
+}
+
+.top-stories-top-img{
+    height: 400px;
+}
+
+.top-stories-hr{
+    width: 90%;
+    margin: auto;
+}
+
+.the-latest-text::after{
+    display: inline-block;
+    content: "";
+    border-top: 5px solid #fff200;
+    width: 530px;
+    margin: 0 1rem;
+    transform: translateY(-5px);
+}
