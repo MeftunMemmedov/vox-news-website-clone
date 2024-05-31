@@ -7,6 +7,13 @@ import Science from '../pages/Science'
 import Money from '../pages/Money'
 import Health from '../pages/Health'
 import Technology from '../pages/Technology'
+import NewsDetails from '../pages/NewsDetails'
+import Login from '../pages/Login'
+import Author from '../Author/Author'
+
+import NewsList from '../Author/NewsList'
+import AddNews from '../Author/AddNews'
+import Authors from '../pages/Authors'
 
 const AppRouter = () => {
   return (
@@ -20,6 +27,14 @@ const AppRouter = () => {
         <Route path='/money' element={<Money />} />
         <Route path='/health' element={<Health />} />
         <Route path='/money' element={<Money />} />
+        <Route path='/login' element={<Login />} />
+
+          <Route path='/author' element={<Author/>} />
+          <Route path='/addnews' element={<AddNews />}/>
+          <Route path='/news/:id' element={<NewsDetails/>} />
+          <Route path='/author/:name' element={<NewsList/>} />
+          <Route path='/authors/:name' element={<Authors/>} />
+
       </Routes>
     </>
   )

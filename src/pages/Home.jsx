@@ -3,7 +3,7 @@ import '../assets/css/home.css'
 import TopNews from '../components/TopNews'
 import { useDispatch, useSelector } from 'react-redux'
 import SingleNews from '../components/SingleNews'
-
+// 1020784632c9491e915dfd5bb2b58530
 const Home = () => {
   const dispatch=useDispatch()
 
@@ -16,23 +16,23 @@ const Home = () => {
   return (
     <>
       <div className="container-fluid">
-        <div className="container">
+        <div className="container-lg">
 
           <div className="row mt-4 m-auto">
             <div className="col-12 top-stories-text-box mt-3">
-              <h2 className='text-center m-auto fw-bold'><i>Top Stories</i></h2>            
+              <h2 className='text-center m-auto merriweather-bold-italic'>Top Stories</h2>            
             </div>
           </div>
 
-          <div className="row px-5 top-stories-box">
-            <div className="col-3 ">
+          <div className="row px-lg-5  top-stories-box">
+            <div className="col-lg-3 col-md-5 col-12">
               {
                 slicedNewsForLeft.map((news, i)=>{
                   return(
                     <>
                     <div className="row text-start">
                       <div className="col-12">
-                        <img src={news.main_img} className='w-100'/>
+                        <img src={news.main_img} className='w-100 p-0 m-0'/>
                       </div>
 
                       <div className="col-12">
@@ -48,10 +48,10 @@ const Home = () => {
               }
             </div>
 
-            <div className="col-6">
+            <div className="col-lg-6 col-md-7 col-12">
               <div className="row">
-                <div className="col-12 p-0 top-stories-top-img overflow-hidden">
-                  <img src={news[0]?.main_img} className='w-100 p-0'/>
+                <div className="col-12 p-lg-0 top-stories-top-img overflow-hidden">
+                  <img src={news[0]?.main_img} className='w-100 '/>
                 </div>
                 <div className="col-12">
                   <h2 className='mb-2 fw-bold' style={{fontSize:'40px'}}>{news[0]?.title}</h2>
@@ -75,14 +75,14 @@ const Home = () => {
     
             </div>
 
-            <div className="col-3 ">
+            <div className="col-lg-3 col-12 d-flex flex-column flex-md-row">
             {
                 slicedNewsForRight.map((news, i)=>{
                   return(
                     <>
                     <div className="row text-start">
                       <div className="col-12">
-                        <img src={news.main_img} className='w-100'/>
+                        <img src={news.main_img} className='w-100 p-0'/>
                       </div>
 
                       <div className="col-12">
@@ -113,7 +113,7 @@ const Home = () => {
       <div className="container">
         <div className="row">
 
-          <div className="col-8">
+          <div className="col-lg-8 col-12">
               <div className="row">
                 <div className="col-12 mt-5">
                   <h4 className='text-start the-latest-text fw-bold'><i>THE LATEST</i></h4>

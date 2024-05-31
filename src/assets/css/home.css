@@ -46,3 +46,34 @@ h2 span{
     margin: 0 1rem;
     transform: translateY(-5px);
 }
+
+
+@media (max-width:425px) {
+    .the-latest-text::after{
+        display: inline-block;
+        content: "";
+        border-top: 5px solid #fff200;
+        width:230px;
+        margin: 0 1rem;
+        transform: translateY(-5px);
+    }
+
+    .top-stories-text-box{
+        border: 5px solid #fff200;
+        border-bottom: 0;
+        border-right: 0;
+        border-left: 0;
+        height: 80px;
+    }
+}
+
+@media (max-width:768px){
+    .top-stories-text-box{
+        border: 5px solid #fff200;
+        border-bottom: 0;
+        border-right: 0;
+        border-left: 0;
+        height: 80px;
+    }
+}
+

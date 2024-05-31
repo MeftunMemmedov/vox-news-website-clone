@@ -1,9 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoIosSearch } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentAuthor, setIsLoggedIn } from '../redux/authSlice';
+import SearchBar from '../components/SearchBar';
+import UserDropdown from '../components/UserDropdown';
 
 
 const Header = () => {
+    const {isLoggedIn, currentAuthor, authors}=useSelector(store=>store.auth)
+    const navigate=useNavigate()
+    const dispatch=useDispatch()
+    // const currentAuthor=authors.find((author)=>author.id==currentAuthorId)
+
+    console.log(currentAuthor)
+
+   
+
   return (
     <>
       <header className='bg-md-light border text-secondary'>
@@ -30,8 +43,31 @@ const Header = () => {
                 <div className="col-md-3 col-6 d-flex justify-content-around align-items-center m-0">
 
                     <div className="row w-100 d-flex justify-content-between">
-                        <div className="col-6 p-0"><button className='w-100 border-0 rounded bg-button h-100 fw-bold text-light'>Give</button></div>
-                        <div className="col-4 p-0"><button className='w-100 border-0 rounded ' type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><IoIosSearch/></button></div>
+                        <div className="col-6 p-0">
+                            {
+                                isLoggedIn? 
+                                <UserDropdown currentAuthor={currentAuthor} />
+                                :
+                                <button 
+                                className='w-100 border-0 rounded bg-button h-100 fw-bold text-light' 
+                                onClick={()=>navigate('/login')}
+                            >
+                                Login
+                            </button>
+                            }
+                        </div>
+                        <div className="col-4 p-0">
+                            <button 
+                                className='w-100 border-0 rounded ' 
+                                type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#collapseExample" 
+                                aria-expanded="false" 
+                                aria-controls="collapseExample"
+                            >
+                                <IoIosSearch/>
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -39,15 +75,10 @@ const Header = () => {
             </div>
         </div>
 
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
+        <div className="collapse" id="collapseExample">
+            <div className="card card-body">
                 <div className="row">
-                    <div className="col-lg-10 col-8 d-flex justify-content-end">
-                        <input type="text" className='w-75 border-0 border-bottom search-input'/>
-                    </div>
-                    <div className="col-lg-2 col-4">
-                        <button className='w-50 btn btn-dark '><IoIosSearch/></button>
-                    </div>
+                    <SearchBar />
                 </div>
             </div>
         </div>
