@@ -60,24 +60,39 @@ export const newsSlice=createSlice({
         news:[],
         politicNews:[],
         specificNews:{},
-        newsByAuthor:[]
+        newsByAuthor:[],
+        isLoading:false
     },
     reducers:{
 
     },
     extraReducers:(builder)=>{
+        builder.addCase(getNews.pending, (state)=>{
+          state.isLoading=true
+        })
         builder.addCase(getNews.fulfilled, (state, action)=>{
             state.news=action.payload
+            state.isLoading=false
+        })
+        
+        builder.addCase(getNewsById.pending, (state)=>{
+          state.isLoading=true
+        })
+        builder.addCase(getNewsById.fulfilled, (state, action)=>{
+            state.specificNews=action.payload
+            state.isLoading=false
+        })
+        
+        builder.addCase(getNewsByAuthor.pending, (state)=>{
+          state.isLoading=true
+        })
+        builder.addCase(getNewsByAuthor.fulfilled, (state, action)=>{
+          state.newsByAuthor=action.payload
+          state.isLoading=false
         })
         // builder.addCase(getPoliticNews.fulfilled, (state, action)=>{
         //     state.politicNews=action.payload
         // })
-        builder.addCase(getNewsById.fulfilled, (state, action)=>{
-            state.specificNews=action.payload
-        })
-        builder.addCase(getNewsByAuthor.fulfilled, (state, action)=>{
-          state.newsByAuthor=action.payload
-        })
     }
 })
 

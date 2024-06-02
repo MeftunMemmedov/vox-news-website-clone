@@ -11,6 +11,7 @@ const SearchBar = () => {
         <input 
         type="search" 
         name='search' 
+        placeholder='Not Working Yet....('
         className='w-75 border-0 border-bottom search-input'
         onChange={(e)=>setSearchInput(e.target.value)}
         />

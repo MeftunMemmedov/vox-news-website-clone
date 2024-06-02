@@ -28,13 +28,17 @@ const Authors = () => {
               </div>
 
             <div className="row">
-                {
+                <div className="col-9">
+                  <div className="row">
+                  {
                 newsByAuhtor.map((news)=>{
                     return(
                         <SingleNews news={news}/>
                     )
                 })
                 }
+                  </div>
+                </div>
             </div>
         </div>
       </div>

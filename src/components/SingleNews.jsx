@@ -11,7 +11,7 @@ const SingleNews = ({news}) => {
         </div>
         <div className="col-8">
             <Link to={`/news/${news.id}`} className='nav-link'><h5>{news.title}</h5></Link>
-            <p className='text-secondary'>By {news.written_by} | {news.day}</p>
+            <p className='text-secondary'>By <Link className='nav-link d-inline' to={`/authors/${news.written_by}`}>{news.written_by} | {news.day}</Link></p>
         </div>
       </div>
     </>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentAuthor, setIsLoggedIn } from '../redux/authSlice';
 import SearchBar from '../components/SearchBar';
 import UserDropdown from '../components/UserDropdown';
+import BurgerMenu from '../components/BurgerMenu';
 
 
 const Header = () => {
@@ -30,7 +31,7 @@ const Header = () => {
                     </div>    
                     
                 </div>
-                <div className="col-md-7 col-4">
+                <div className="col-md-7 col-1">
                     <nav className='d-md-flex d-none justify-content-around align-items-center h-100 fw-bold'>
                         <Link className='nav-link' to={'/politics'}>Politics</Link>
                         <Link className='nav-link' to={'/culture'}>Culture</Link>
@@ -40,9 +41,25 @@ const Header = () => {
                         <Link className='nav-link' to={'/money'}>Money</Link>
                     </nav>
                 </div>
-                <div className="col-md-3 col-6 d-flex justify-content-around align-items-center m-0">
+                <div className="col-md-3 col-9 d-flex justify-content-around align-items-center m-0">
 
-                    <div className="row w-100 d-flex justify-content-between">
+                    <div className="row w-100 d-flex d-md-none">
+                        <div className="col-8">
+                        <button 
+                                className='w-100 border-0 rounded ' 
+                                type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#collapseExample" 
+                                aria-expanded="false" 
+                                aria-controls="collapseExample"
+                            >
+                                <IoIosSearch/>
+                            </button>
+                        </div>
+                        <div className="col-4 d-flex justify-content-end"><BurgerMenu /></div>
+                    </div>
+                    
+                    <div className="row w-100 d-none d-md-flex justify-content-between">
                         <div className="col-6 p-0">
                             {
                                 isLoggedIn? 
@@ -56,7 +73,7 @@ const Header = () => {
                             </button>
                             }
                         </div>
-                        <div className="col-4 p-0">
+                        <div className="col-6 p-0">
                             <button 
                                 className='w-100 border-0 rounded ' 
                                 type="button" 

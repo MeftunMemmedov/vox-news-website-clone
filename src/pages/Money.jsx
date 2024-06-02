@@ -1,11 +1,15 @@
 import React from 'react'
 import SingleNews from '../components/SingleNews'
 import { useSelector } from 'react-redux'
+import Loading from '../components/Loading'
+import { Link } from 'react-router-dom'
 
 const Money = () => {
-    const {news}=useSelector(store=>store.news)
+    const {news, isLoading}=useSelector(store=>store.news)
 
     const specificNews=news.filter((news)=>news.category.some((category)=>category=='Money'))
+
+    if(isLoading) return (<Loading />)
   return (
     <>
       <div className="container-fluid">
@@ -40,10 +44,10 @@ const Money = () => {
                 <div className="col-lg-12 col-md-6 h-50  overflow-hidden p-0 d-flex justify-content-center align-items-center position-relative">
                   <img src={specificNews[1]?.main_img} className='w-100' />
 
-                  <div className="row position-absolute w-100 p-5 opacity-75 position-relative" style={{bottom:"-50px" ,background:"rgb(255,255,255) linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 79%)",}}>
+                  <div className="row position-absolute w-100 p-5 top-news-title-box text-light" style={{bottom:"-50px" }}>
                     <div className="col-12">
-                      <h5 className='fw-bold'>{specificNews[1]?.title}</h5>
-                      <p><i>By {specificNews[1]?.written_by}</i></p>
+                    <Link className='nav-link' to={`/news/${specificNews[1]?.id}`}><h5 className='fw-bold text-light'>{specificNews[1]?.title}</h5></Link>
+                    <p className='text-light'>By <Link className='nav-link d-inline' to={`/authors/${specificNews[1]?.written_by}`}>{specificNews[1]?.written_by}</Link></p>
                     </div>
                   </div>
                   
@@ -51,10 +55,10 @@ const Money = () => {
                 <div className="col-lg-12 col-md-6 h-50 overflow-hidden p-0 d-flex justify-content-center align-items-center position-relative" >
                   <img src={specificNews[2]?.main_img} className='w-100 object-fit-cover'/>
                   
-                  <div className="row position-absolute w-100 p-5 opacity-75 position-relative" style={{bottom:"-50px" ,background:"rgb(255,255,255) linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 79%)",}}>
+                  <div className="row position-absolute w-100 p-5 top-news-title-box" style={{bottom:"-50px" }}>
                     <div className="col-12">
-                      <h5 className='fw-bold'>{specificNews[2]?.title}</h5>
-                      <p><i>By {specificNews[2]?.written_by}</i></p>
+                    <Link className='nav-link' to={`/news/${specificNews[2]?.id}`}><h5 className='fw-bold text-light'>{specificNews[2]?.title}</h5></Link>
+                      <p className='text-light'>By <Link className='nav-link d-inline' to={`/authors/${specificNews[2]?.written_by}`}>{specificNews[2]?.written_by}</Link></p>
                     </div>
                   </div>
                 </div>

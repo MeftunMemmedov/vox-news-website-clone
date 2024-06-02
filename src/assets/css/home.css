@@ -11,6 +11,10 @@ h2 span{
     padding:0 10px;
 } */
 
+.main-bg{
+    background-color:  #fff200;
+}
+
 .top-stories-text-box{
     border: 5px solid #fff200;
     border-bottom: 0;
@@ -30,7 +34,7 @@ h2 span{
 }
 
 .top-stories-top-img{
-    height: 400px;
+    height: 380px;
 }
 
 .top-stories-hr{
@@ -74,6 +78,14 @@ h2 span{
         border-right: 0;
         border-left: 0;
         height: 80px;
+    }
+
+    .top-stories-text-box h2{
+        width: 40%;
+    }
+
+    .top-stories-top-img{
+        height: 320px;
     }
 }
 

@@ -11,7 +11,6 @@ const Login = () => {
 
     const [authorsInput,setAuthorsInput]=useState({
         email:'',
-        name:'',
         password:''
     })
 
@@ -40,13 +39,14 @@ const Login = () => {
 
     useEffect(()=>{
         dispatch(getAuthors())
+        window.scrollTo(0,0)
     },[])
   return (
     <>
       <div className="container-fluid">
         <div className="container">
-            <div className="row">
-                <div className="col-6 m-auto mt-5">
+            <div className="row py-5">
+                <div className="col-lg-6 col-md-8 col-sm-12 m-auto mt-5">
                     <form onSubmit={handelSubmit}>
                         <div className="row">
                             <div className="col-12 mt-3">                                
@@ -56,12 +56,12 @@ const Login = () => {
                                 </div>
                             </div>
 
-                            <div className="col-12 mt-3">
+                            {/* <div className="col-12 mt-3">
                                 <div className="row">
                                     <div className="col-2"><label htmlFor='name'>Name</label></div>
                                     <div className="col-10"><input type="text" name='name' id='name' className=' w-100' onChange={handleChange}/></div>
                                 </div>
-                            </div>
+                            </div> */}
                             
                             <div className="col-12 my-3">
                                 <div className="row">

@@ -16,6 +16,7 @@ import AddNews from '../Author/AddNews'
 import Authors from '../pages/Authors'
 
 const AppRouter = () => {
+
   return (
     <>
       <Routes>
@@ -28,13 +29,12 @@ const AppRouter = () => {
         <Route path='/health' element={<Health />} />
         <Route path='/money' element={<Money />} />
         <Route path='/login' element={<Login />} />
-
           <Route path='/author' element={<Author/>} />
           <Route path='/addnews' element={<AddNews />}/>
           <Route path='/news/:id' element={<NewsDetails/>} />
           <Route path='/author/:name' element={<NewsList/>} />
           <Route path='/authors/:name' element={<Authors/>} />
-
+          
       </Routes>
     </>
   )

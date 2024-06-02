@@ -7,7 +7,7 @@ const Author = () => {
   const {currentAuthor}=useSelector(store=>store.auth)
   const {news}=useSelector(store=>store.news)
 
-  const newsByAuthor=news.filter((news)=>news.written_by===currentAuthor.name)
+  const newsByAuthor=news.filter((news)=>news.written_by===currentAuthor?.name)
 
   console.log(newsByAuthor)
   return (
@@ -22,8 +22,8 @@ const Author = () => {
             </div>
 
             <div className="row">
-              <Link to={`/author/${currentAuthor.name}`} className='nav-link'>
-                <div className="col-4 border rounded p-5 text-start bg-danger">
+              <Link to={`/author/${currentAuthor?.name}`} className='nav-link'>
+                <div className="col-lg-4 col-md-6 col-10 border rounded p-5 text-start bg-danger">
                   <FaRegNewspaper size={90} className='mb-1'/>
                   <h3 className='fw-bold'>News: {newsByAuthor.length}</h3>
                 </div>

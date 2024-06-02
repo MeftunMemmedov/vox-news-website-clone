@@ -1,0 +1,20 @@
+.recommendations-head-text::after{
+    display: inline-block;
+    content: "";
+    border-top: 5px solid #fff200;
+    width: 320px;
+    margin: 0 1rem;
+    transform: translateY(-5px);
+  }
+
+
+@media (max-width:768px) {
+    .recommendations-head-text::after{
+      display: inline-block;
+      content: "";
+      border-top: 5px solid #fff200;
+      width: 220px;
+      margin: 0 1rem;
+      transform: translateY(-5px);
+    }
+  }

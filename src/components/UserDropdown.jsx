@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { setIsLoggedIn } from '../redux/authSlice'
 import { Link, useNavigate } from 'react-router-dom'
 
-const UserDropdown = ({currentAuthor}) => {
+const UserDropdown = ({currentAuthor, isOpen, setIsOpen}) => {
     const dispatch=useDispatch()
     const navigate=useNavigate()
 
@@ -11,6 +11,8 @@ const UserDropdown = ({currentAuthor}) => {
     const logOut=()=>{
         dispatch(setIsLoggedIn())
         localStorage.removeItem('authorId')
+        navigate('/')
+        setIsOpen(false)
     }
   return (
     <>
@@ -19,7 +21,7 @@ const UserDropdown = ({currentAuthor}) => {
            {currentAuthor?.name}
         </button>
         <ul className="dropdown-menu px-2">
-            <li className='mb-2'><Link to={'/author'} className='btn btn-primary w-100'>Dashboard</Link></li>
+            <li className='mb-2'><Link to={'/author'} onClick={()=>setIsOpen(false)} className='btn btn-primary w-100'>Dashboard</Link></li>
             <li><button onClick={logOut} className='btn btn-danger w-100'>Log Out</button></li>
         </ul>
     </div>

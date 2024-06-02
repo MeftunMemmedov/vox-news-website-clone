@@ -4,10 +4,14 @@ import JoditEditor from 'jodit-react';
 import { useDispatch, useSelector } from 'react-redux'
 import { createNewContent } from '../redux/newsSlice';
 import axios from 'axios';
+import { TiDelete } from "react-icons/ti";
+import { useNavigate } from 'react-router-dom';
+
 
 const AddNews = () => {
     const {currentAuthor}=useSelector(store=>store.auth)
     const dispatch=useDispatch()
+    const navigate=useNavigate()
     const editor = useRef(null);
 	const [content, setContent] = useState('');
     const [category, setCategory]=useState([])
@@ -19,6 +23,7 @@ const AddNews = () => {
     const [newInfo, setNewInfo]=useState({
         written_by:currentAuthor.name,
         title:'',
+        main_img:'',
         description:'',
         day:date.getFullYear()+"-"+"0"+date.getMonth()+"-"+date.getDate(),
         time:date.getHours()+":"+date.getMinutes(),
@@ -47,14 +52,14 @@ const AddNews = () => {
 
     const removeCategory = (targetIndex) => {
         const newArray = category.filter((item, index) => index !== targetIndex);
-        setCategory(newArray); // Updates the state with the new array
+        setCategory(newArray);
       };
 
     const handleSubmit=async(e)=>{
        
         e.preventDefault();
             
-        const {written_by,title,description,day, time}=newInfo
+        const {written_by,title,description,day, time, main_img}=newInfo
 
         const data={
             written_by:written_by,
@@ -62,7 +67,8 @@ const AddNews = () => {
             description:description,
             day:day,
             time:time,
-            category:category
+            category:category,
+            main_img:main_img
         }
 
       await axios.post('https://flvxlsycpoxwclnqfrvr.supabase.co/rest/v1/News', data, {
@@ -72,6 +78,8 @@ const AddNews = () => {
             "Content-Type": "application/json"
         }
       })
+
+      navigate('/author')
     }
 
 
@@ -82,19 +90,27 @@ const AddNews = () => {
     <form onSubmit={handleSubmit}>
       <div className="container-fluid">
         <div className="container">
-                <div className="row mt-5">
+            <div className="row mt-5">
+                <div className="col-8 m-auto border py-2 rounded shadow text-start">
+                <div className="row">
 
                     <div className="col-12 d-flex justify-content-start">
+                        <label className='mx-2 mt-1'>By</label>
                         <input type='text' defaultValue={newInfo.written_by} disabled/>
                     </div>
 
-                    <div className="col-12 mb-3">
+                    <div className="col-12 my-4">
                         <label htmlFor='title' className='fw-bold fs-2'>Title</label>
                         <input type='text' name='title' id='title' onChange={handleChange} className='w-100 rounded' placeholder='Title....'/>
                     </div>
                     <hr/>
+                    <div className="col-12 my-4">
+                        <label htmlFor='main_img' className='fw-bold fs-2'>Main Image</label>
+                        <input type='text' name='main_img' id='main_img' onChange={handleChange} className='w-100 rounded' placeholder='Title....'/>
+                    </div>
+                    <hr/>
                     <div className="col-12">
-                        <h2>Category</h2>
+                        <h2 className='fw-bold'>Category</h2>
                         {
                             categories.map((ctgr)=>{ 
                                 return <button type='button' className='btn btn-secondary mx-2' onClick={()=>setCategory([...category, ctgr])}>{ctgr}</button>
@@ -104,12 +120,14 @@ const AddNews = () => {
                         {/* <button type='button' onClick={showData}>Submit</button> */}
                     </div>
 
-                    <div className="col-12 py-3 border rounded mb-3">
+                    <div className="col-12 py-3 mb-3">
                         {category.length===0?<h2 className='text-secondary'>Choose Category....</h2>:
                         category.map((ct, i)=>{
-                            return <span className='border rounded bg-dark text-light p-2 '>
+                            return <span className='border rounded bg-dark text-light p-2 pe-0'>
                                 {ct}
-                                <span className='border rounded mx-2 bg-danger' role='button' onClick={()=>removeCategory(i)}>x</span>
+                                <span className=' mx-2' role='button' onClick={()=>removeCategory(i)}>
+                                    <TiDelete size={20} className='mb-1'/>
+                                </span>
                             </span>
                         })
                         }
@@ -126,10 +144,12 @@ const AddNews = () => {
                         onChange={(newContent) => handleChangeForJodit('description', newContent)}
                     />
                     </div>
-                    <div className="col-12 my-4">
+                    <div className="col-12 my-4 d-flex justify-content-center">
                         <button type='submit' className='btn btn-primary w-50'>Add</button>
                     </div>
                 </div>
+                </div>
+            </div>
         </div>
       </div>
     </form>
