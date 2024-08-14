@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import{ useMemo, useRef, useState } from 'react'
 import JoditEditor from 'jodit-react';
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,17 +14,18 @@ const AddNews = () => {
     const navigate=useNavigate()
     const editor = useRef(null);
 	const [content, setContent] = useState('');
-    const [category, setCategory]=useState([])
+
 
     
     
     
     const date=new Date()
     const [newInfo, setNewInfo]=useState({
-        written_by:currentAuthor.name,
+        written_by:'',
         title:'',
         main_img:'',
         description:'',
+        category:[],
         day:date.getFullYear()+"-"+"0"+date.getMonth()+"-"+date.getDate(),
         time:date.getHours()+":"+date.getMinutes(),
     })
@@ -50,41 +51,36 @@ const AddNews = () => {
     
     const categories=["Politics","Culture","Money", "Health", "Technology", "Science"]
 
+    const addCategory=(category)=>{
+        setNewInfo(prevInfoData=>({...prevInfoData,category:[...newInfo.category, category]}))
+    }
     const removeCategory = (targetIndex) => {
-        const newArray = category.filter((item, index) => index !== targetIndex);
-        setCategory(newArray);
+        const newArray = newInfo.category.filter((item, index) => index !== targetIndex);
+        setNewInfo(prevInfoData=>({...prevInfoData, category:newArray}))
       };
 
     const handleSubmit=async(e)=>{
        
         e.preventDefault();
-            
-        const {written_by,title,description,day, time, main_img}=newInfo
 
-        const data={
-            written_by:written_by,
-            title:title,
-            description:description,
-            day:day,
-            time:time,
-            category:category,
-            main_img:main_img
-        }
-
-      await axios.post('https://flvxlsycpoxwclnqfrvr.supabase.co/rest/v1/News', data, {
-        headers:{
-            apikey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
-            Authorization:'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
-            "Content-Type": "application/json"
-        }
-      })
+        await axios.post('https://flvxlsycpoxwclnqfrvr.supabase.co/rest/v1/News', newInfo, {
+            headers:{
+                apikey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
+                Authorization:'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
+                "Content-Type": "application/json"
+            }
+        })
 
       navigate('/author')
     }
 
+    useEffect(()=>{
+        setNewInfo(prevInfoData=>({...prevInfoData, written_by:currentAuthor.name}))
+    },[currentAuthor])
 
-    console.log(category)
-    console.log(newInfo)
+    useEffect(()=>{
+        console.log(newInfo)
+    },[newInfo])
   return (
     <>
     <form onSubmit={handleSubmit}>
@@ -113,7 +109,7 @@ const AddNews = () => {
                         <h2 className='fw-bold'>Category</h2>
                         {
                             categories.map((ctgr)=>{ 
-                                return <button type='button' className='btn btn-secondary mx-2' onClick={()=>setCategory([...category, ctgr])}>{ctgr}</button>
+                                return <button type='button' className='btn btn-secondary mx-2' onClick={()=>addCategory(ctgr)}>{ctgr}</button>
                             })
                         }
 
@@ -121,8 +117,8 @@ const AddNews = () => {
                     </div>
 
                     <div className="col-12 py-3 mb-3">
-                        {category.length===0?<h2 className='text-secondary'>Choose Category....</h2>:
-                        category.map((ct, i)=>{
+                        {newInfo.category.length===0?<h2 className='text-secondary'>Choose Category....</h2>:
+                        newInfo.category.map((ct, i)=>{
                             return <span className='border rounded bg-dark text-light p-2 pe-0'>
                                 {ct}
                                 <span className=' mx-2' role='button' onClick={()=>removeCategory(i)}>
